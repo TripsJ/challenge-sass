@@ -1,0 +1,126 @@
+@use "./variables";
+
+@mixin flashmessage($bcolor) {
+    border: 1px solid #8C8C8C;
+    padding: 16px;
+    color:variables.$color_message;
+    background-color:$bcolor ;
+}
+
+@mixin boxshadow($colorMixin){
+    -webkit-box-shadow: 10px 10px 15px -4px $colorMixin;
+    -moz-box-shadow: 10px 10px 15px -4px $colorMixin;
+    box-shadow: 10px 10px 15px -4px $colorMixin;
+}
+
+body{
+    font: 100% "Space Mono", monospace;
+    color: variables.$color_body;
+    margin: 0;
+    padding: variables.$generic_padding;
+    padding-top: variables.$generic_padding*0;
+    padding-bottom: variables.$generic_padding*0;
+    background-color:variables.$colorBg_body;
+    overflow-x: hidden;
+
+}
+
+main {
+    padding: 0 1em;
+}
+
+h1,
+h2,
+h3 {
+color:variables.$color_h;
+}
+
+h1 {
+text-align: center;
+}
+
+h3 {
+    text-align: center;
+    font-size: 1.5em;
+    padding: 32px;
+    margin-bottom: 0px;
+}
+
+article {
+    display: flex;
+    flex-wrap: wrap;
+
+    section {
+        flex-grow: 1;
+        flex-basis: 45%;
+        border: 1px variables.$color_section_border solid;
+        padding: 16px;
+        margin: 16px;
+        clear: both;
+        overflow: auto;
+        @include boxshadow(variables.$colorBoxShadow);
+        box-sizing: border-box;
+
+        #selling-points {
+            flex-grow: 2;
+            flex-basis: 100%;
+        }
+
+
+        code {
+            background: variables.$colorBg_article_code;
+            border: 1px solid variables.$colorBorder_article_code;
+            color: variables.$color_article_code;
+            page-break-inside: avoid;
+            font-family: monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 1.6em;
+            max-width: 100%;
+            overflow: auto;
+            padding: 1em 1.5em;
+            display: block;
+            word-wrap: break-word;
+
+            .before {
+                float: left;
+                width: 40%;
+            }
+
+            .after {
+                float: right;
+                width: 40%;
+            }
+        }
+    }
+}
+
+.success{
+    @include flashmessage(variables.$colorBg_success);
+}
+
+.error{
+    @include flashmessage(variables.$colorBg_error);
+    &:hover{
+        background-color: green;
+    }
+    
+}
+
+.warning{
+    @include flashmessage(variables.$colorBg_warnig);
+}
+
+footer h3{
+    padding:variables.$generic_padding*2;
+}
+
+
+@for $i from 1 through 7{
+    .advantages:nth-child(n + #{$i}){
+        background-color: darken(variables.$base-color, $i * 12%)
+
+    }
+
+    
+}
